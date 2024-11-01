@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity // 엔티티로 지정 : 데이터베이스의 레코드 = 테이블의 한 행(row), CRUD(생성,읽기,업데이트,삭제) 작업의 기본 단위로 활용
-@Getter // 게터 메섣들을 정의 하지 않기 위해서 사용
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자를 정의하지 않아도 됨
+@Getter // 게터 메서드를 정의 하지 않기 위해서 사용
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자를 정의하지 않아도 됨, JPA 엔티티에서 기본 생성자를 외부에서 직접 호출할 수 없게 보호하는 용도
 public class Article {
 
     @Id // id 필드가 엔티티의 기본 키임을 나타냄, 기본키 : 테이블에서 각 레코드를 고유하게 식별
@@ -25,8 +25,6 @@ public class Article {
     public Article(String title, String content){
         this.title = title;
         this.content = content;
-    }
-    protected Article(){ // protected 접근제어자는 이 생성자가 동일 패키지내 or 상속받은 클래스에서만 호출될 수 있도록 한다.
     }
     public Long getId(){ // id 필드값을 가져와 반환하는 getter 메서드 -> Article 객체의 "id"값을 외부에서도 읽을수 있게됨 -> 이러한 캡슐화 지원으로 필드에 대한 직접 접근을 제한
         return id;
